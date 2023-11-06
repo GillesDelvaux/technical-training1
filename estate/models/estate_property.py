@@ -5,21 +5,21 @@ class estate_property(models.Model):
     _name = "estate.estate.property"
     _description = "Estate property model"
 
-    name = fields.Char(required=True)
-    description = fields.Text()
+    name = fields.Char('Title', required=True)
+    description = fields.Text('Description')
     postcode = fields.Char()
-    date_availability = fields.Date(copy=False, default=lambda self: (fields.Date.context_today(self) + relativedelta(months=3)))
+    date_availability = fields.Date('Available From',copy=False, default=lambda self: (fields.Date.context_today(self) +                    relativedelta(months=3)))
     expected_price = fields.Float(required=True)
     selling_price = fields.Float(readonly=True, copy=False)
     bedrooms = fields.Integer(default=2)
-    living_area = fields.Integer()
+    living_area = fields.Integer('Living area(sqm)')
     facades = fields.Integer()
     garage = fields.Boolean()
     garden = fields.Boolean()
     active = fields.Boolean(default=True)
-    garden_area = fields.Integer()
+    garden_area = fields.Integer('Garden area(sqm)')
     garden_orientation = fields.Selection(
-        string = 'Orientation',
+        string = 'Garden Orientation',
         selection = [('north', 'North'), ('south','South'),('east','East'),('west','West')],
         help = "This is used to get the orientation of the garden"
     )
